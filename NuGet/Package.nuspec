@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>SitecoreExtension.DynamicKeyPlaceholder</id>
-		<version>1.0</version>
+		<version>1.1</version>
 		<authors>1508 A/S</authors>
 		<owners>1508 A/S</owners>
 		<licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
@@ -19,6 +19,7 @@
 		</description>
 		<releaseNotes>
 			Version 1.0 - Initial release.
+			Version 1.1 - Minor code tweaks on ChromeData.
 		</releaseNotes>
 		<copyright>http://creativecommons.org/licenses/by/3.0/</copyright>
 		<tags>Sitecore Controls</tags>
