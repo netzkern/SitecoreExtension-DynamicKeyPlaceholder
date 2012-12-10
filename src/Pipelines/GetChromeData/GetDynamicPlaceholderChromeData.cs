@@ -1,5 +1,8 @@
 ﻿
 
+using Sitecore.Data.Items;
+using Sitecore.Web.UI.PageModes;
+
 namespace SitecoreExtension.DynamicKeyPlaceholder.Pipelines.GetChromeData
 {
     using System;
@@ -17,23 +20,35 @@ namespace SitecoreExtension.DynamicKeyPlaceholder.Pipelines.GetChromeData
         {
             Assert.ArgumentNotNull(args, "args");
             Assert.IsNotNull(args.ChromeData, "Chrome Data");
-            if ("placeholder".Equals(args.ChromeType, StringComparison.OrdinalIgnoreCase))
+            if (!"placeholder".Equals(args.ChromeType, StringComparison.OrdinalIgnoreCase))
             {
-                string placeholderKey = args.CustomData["placeHolderKey"] as string;
-                Regex regex = new Regex(GetDynamicKeyAllowedRenderings.DYNAMIC_KEY_REGEX);
-                Match match = regex.Match(placeholderKey);
-                if (match.Success && match.Groups.Count > 0)
-                {
-                    string newPlaceholderKey = match.Groups[1].Value;
-                    args.CustomData["placeHolderKey"] = newPlaceholderKey;
-                    base.Process(args);
-                    args.CustomData["placeHolderKey"] = placeholderKey;
-                }
-                else
-                {
-                    base.Process(args);
-                }
+                return;
+            }
+            
+            string placeholderKey = args.CustomData["placeHolderKey"] as string;
+            Regex regex = new Regex(GetDynamicKeyAllowedRenderings.DYNAMIC_KEY_REGEX);
+            Match match = regex.Match(placeholderKey);
+            if (!match.Success || match.Groups.Count <= 0)
+            {
+                return;
+            }
 
+            string newPlaceholderKey = match.Groups[1].Value;
+
+            // Handles replacing the displayname and description of the placeholder area to the master reference without changeing other references
+            Item item = null;
+            if (args.Item != null)
+            {
+                string layout = ChromeContext.GetLayout(args.Item);
+                item = Sitecore.Client.Page.GetPlaceholderItem(newPlaceholderKey, args.Item.Database, layout);
+                if (item != null)
+                {
+                    args.ChromeData.DisplayName = item.DisplayName;
+                }
+                if ((item != null) && !string.IsNullOrEmpty(item.Appearance.ShortDescription))
+                {
+                    args.ChromeData.ExpandedDisplayName = item.Appearance.ShortDescription;
+                }
             }
         }
     }
