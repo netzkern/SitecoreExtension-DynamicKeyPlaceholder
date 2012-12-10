@@ -17,7 +17,7 @@
     public class GetDynamicKeyAllowedRenderings : GetAllowedRenderings
     {
         //text that ends in a GUID
-        const string DYNAMIC_KEY_REGEX = @"(.+){[\d\w]{8}\-([\d\w]{4}\-){3}[\d\w]{12}}";
+        public const string DYNAMIC_KEY_REGEX = @"(.+){[\d\w]{8}\-([\d\w]{4}\-){3}[\d\w]{12}}";
 
         public new void Process(GetPlaceholderRenderingsArgs args)
         {
@@ -35,7 +35,7 @@
                 return;
             }
 
-            // Same as Sitecore.Pipelines.GetPlaceholderRenderings.GetAllowedRenderings but with fake placeholderKey
+            // Same code as Sitecore.Pipelines.GetPlaceholderRenderings.GetAllowedRenderings but with fake placeholderKey
             Item placeholderItem = null;
             if (ID.IsNullOrEmpty(args.DeviceId))
             {
@@ -48,24 +48,25 @@
                     placeholderItem = Client.Page.GetPlaceholderItem(placeholderKey, args.ContentDatabase, args.LayoutDefinition);
                 }
             }
-            List<Item> collection = null;
+
+            List<Item> renderings = null;
             if (placeholderItem != null)
             {
-                bool flag;
+                bool allowedControlsSpecified;
                 args.HasPlaceholderSettings = true;
-                collection = this.GetRenderings(placeholderItem, out flag);
-                if (flag)
+                renderings = this.GetRenderings(placeholderItem, out allowedControlsSpecified);
+                if (allowedControlsSpecified)
                 {
                     args.CustomData["allowedControlsSpecified"] = true;
                 }
             }
-            if (collection != null)
+            if (renderings != null)
             {
                 if (args.PlaceholderRenderings == null)
                 {
                     args.PlaceholderRenderings = new List<Item>();
                 }
-                args.PlaceholderRenderings.AddRange(collection);
+                args.PlaceholderRenderings.AddRange(renderings);
             }
         }
     }
