@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>SitecoreExtension.DynamicKeyPlaceholder</id>
+		<version>1.0</version>
+		<authors>1508 A/S</authors>
+		<owners>1508 A/S</owners>
+		<licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
+		<projectUrl>https://github.com/1508/SitecoreExtension-DynamicKeyPlaceholder</projectUrl>
+		<iconUrl>http://www.sitecore.net/favicon.ico</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary>
+			Adds DynamicKeyPlaceholders allowing for a spot with placeholder to be added multiple times to a page.
+		</summary>
+		<description>
+			Appends the rendering Unique Id to the Placeholder id for allowing a unique reference for the page renderings to attach on, default implementation only allows for a single Placeholder ID to be present on a page at one time. The extension is hidden to the ediors. 
+			
+			Requires Sitecore 6.x.
+		</description>
+		<releaseNotes>
+			Version 1.0 - Initial release.
+		</releaseNotes>
+		<copyright>http://creativecommons.org/licenses/by/3.0/</copyright>
+		<tags>Sitecore Controls</tags>
+		<dependencies>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="**\*.*" exclude="Build-NuGet-Package.cmd;NuGet.exe" />
+	</files>
+</package>
