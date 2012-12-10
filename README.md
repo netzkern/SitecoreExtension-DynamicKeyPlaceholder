@@ -8,13 +8,17 @@ Appends the rendering Unique Id to the Placeholder id for allowing a unique refe
 
 ## Requirements
 * Sitecore 6.x 
-* (Sitecore Rocks is great, but is not required for this since there are no Items)
 
 ## Installation 
-Install via nuget install-package SitecoreExtension.DynamicKeyPlaceholder
+Install via nuget
+<pre>
+  PM> Install-Package SitecoreExtension.DynamicKeyPlaceholder
+</pre>
+
 Use the Control DynamicKeyPlaceholder instead of a Sitecore Placeholder control. 
 
 ## Example of use
+```
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotsContainer.ascx.cs" Inherits="Web.UI.SpotsContainer" %>
 <%@ Register TagPrefix="sce" Namespace="SitecoreExtension.DynamicKeyPlaceholder.Controls" Assembly="SitecoreExtension.DynamicKeyPlaceholder" %>
 <div class="container container-wide">
@@ -24,6 +28,7 @@ Use the Control DynamicKeyPlaceholder instead of a Sitecore Placeholder control.
         </div>
     </div>
 </div>
+```
 
 ## Notice
-Once content is generated into the dynamic placeholder the rendering is bound the the placeholderid combined with the unique rendering id, meaning that removing a spot with the dynamic placeholder and adding it again will create a new unique id and therefore will leave the other renderings orphans in the layout information and the user must re-add the renderings. This is sound and expected behavior :)
+Once content is added into the dynamic placeholders the rendering is bound the the placeholderid combined with the unique rendering id, meaning that removing a spot with the dynamic placeholder and adding it again will create a new unique id and therefore will leave the other renderings orphans in the layout information and the user must re-add the renderings. This is sound and expected behavior :)
