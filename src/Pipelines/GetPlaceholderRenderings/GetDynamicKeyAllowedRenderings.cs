@@ -58,6 +58,7 @@
                 if (allowedControlsSpecified)
                 {
                     args.CustomData["allowedControlsSpecified"] = true;
+                    args.Options.ShowTree = false;
                 }
             }
             if (renderings != null)
