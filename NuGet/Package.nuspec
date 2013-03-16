@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>SitecoreExtension.DynamicKeyPlaceholder</id>
-		<version>1.2</version>
+		<version>1.3</version>
 		<authors>1508 A/S</authors>
 		<owners>1508 A/S</owners>
 		<licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
@@ -15,12 +15,14 @@
 		<description>
 			Appends the rendering Unique Id to the Placeholder id for allowing a unique reference for the page renderings to attach on, default implementation only allows for a single Placeholder ID to be present on a page at one time. The extension is hidden to the ediors. 
 			
-			Requires Sitecore 6.x.
+			Requires Sitecore 6.6
+			Sitecore 6.x versions are supported up to version 1.2, from 1.3 Sitecore 6.6 is required
 		</description>
 		<releaseNotes>
 			Version 1.0 - Initial release.
 			Version 1.1 - Minor code tweaks on ChromeData.
-			Version 1.2 - Actually checked the code and is now functioning
+			Version 1.2 - Actually checked the code and is now functioning (working for all Sitecore 6.x versions)
+			Version 1.3 - Allowing placeholder settings to function on Sitecore 6.6 - this version requires Sitecore 6.6
 		</releaseNotes>
 		<copyright>http://creativecommons.org/licenses/by/3.0/</copyright>
 		<tags>Sitecore Controls</tags>
