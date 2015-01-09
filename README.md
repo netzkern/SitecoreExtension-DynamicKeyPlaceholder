@@ -21,6 +21,32 @@ Install via nuget
 
 Use the Control DynamicKeyPlaceholder instead of a Sitecore Placeholder control. 
 
+To get DynamicKeyPlaceholders to work inside of ListViews, you also have to manually change /sitecore/shell/Applications/Page Modes/ChromeTypes/PlaceholderChromeType.js on line 34 from:
+```
+addControlResponse: function(id, openProperties, ds) {                       
+    var options = Sitecore.PageModes.ChromeTypes.Placeholder.getDefaultAjaxOptions("insert");
+    options.context = this;    
+    options.data.rendering = id;
+    options.data.placeholderKey = this.placeholderKey();
+    [...]           
+```
+
+to:
+```
+addControlResponse: function (id, openProperties, ds) {
+    var phkey = this.placeholderKey();
+    var options = Sitecore.PageModes.ChromeTypes.Placeholder.getDefaultAjaxOptions("insert");
+    options.context = this;
+    options.data.rendering = id;
+    if (phkey.match(/{{.*}}/ig)) {
+        options.data.placeholderKey = phkey.substring(phkey.lastIndexOf("/"));
+    } else {
+        options.data.placeholderKey = phkey;
+    }
+    [...]
+```
+
+
 ## Example of use
 ```
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SpotsContainer.ascx.cs" Inherits="Web.UI.SpotsContainer" %>

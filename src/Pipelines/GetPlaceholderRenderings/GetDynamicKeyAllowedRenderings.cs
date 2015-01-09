@@ -16,8 +16,8 @@
     /// </summary>
     public class GetDynamicKeyAllowedRenderings : GetAllowedRenderings
     {
-        //text that ends in a GUID
-        public const string DYNAMIC_KEY_REGEX = @"(.+){[\d\w]{8}\-([\d\w]{4}\-){3}[\d\w]{12}}";
+        //text that ends in a GUID or {{uniqueId}}
+        public const string DYNAMIC_KEY_REGEX = @"(.+)(?:{[\d\w]{8}\-([\d\w]{4}\-){3}[\d\w]{12}}|{{.+}})";
 
         public new void Process(GetPlaceholderRenderingsArgs args)
         {
